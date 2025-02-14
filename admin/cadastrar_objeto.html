@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Objetos</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Área de Administração</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="cadastrar_objeto.html">Cadastro de Objetos</a></li>
+                <li><a href="objetos.html">Lista de Objetos</a></li>
+                <li><a href="cadastrar_usuario.html">Cadastro de Usuários</a></li>
+                <li><a href="usuarios.html">Lista de Usuários</a></li>
+                <li><a href="../public/index.html">Página Inicial</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Cadastro de Objetos</h2>
+        <form id="formObjeto">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por Elias Alves - <a href="sobre_autor.html">Sobre o Autor</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('formObjeto').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const descricao = document.getElementById('descricao').value;
+            let objetos = JSON.parse(localStorage.getItem('objetos')) || [];
+
+            objetos.push({ nome, descricao });
+            localStorage.setItem('objetos', JSON.stringify(objetos));
+
+            alert("Objeto cadastrado com sucesso!");
+            document.getElementById('formObjeto').reset();
+        });
+    </script>
+</body>
+</html>

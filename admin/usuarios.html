@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuários</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Área de Administração</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="cadastrar_objeto.html">Cadastro de Objetos</a></li>
+                <li><a href="lista_objetos.html">Lista de Objetos</a></li>
+                <li><a href="cadastrar_usuario.html">Cadastro de Usuários</a></li>
+                <li><a href="usuarios.html">Lista de Usuários</a></li>
+                <li><a href="../public/index.html">Página Inicial</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Lista de Usuários</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaUsuarios">
+                <!-- Os usuários cadastrados serão inseridos aqui -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por Elias Alves - <a href="sobre_autor.html">Sobre o Autor</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabelaUsuarios = document.getElementById('tabelaUsuarios');
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            function carregarUsuarios() {
+                tabelaUsuarios.innerHTML = '';
+
+                if (usuarios.length === 0) {
+                    tabelaUsuarios.innerHTML = '<tr><td colspan="3">Nenhum usuário cadastrado.</td></tr>';
+                    return;
+                }
+
+                usuarios.forEach((usuario, index) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${usuario.nome}</td>
+                        <td>${usuario.email}</td>
+                        <td>
+                            <button onclick="editarUsuario(${index})">Editar</button>
+                            <button onclick="excluirUsuario(${index})">Excluir</button>
+                        </td>
+                    `;
+                    tabelaUsuarios.appendChild(tr);
+                });
+            }
+
+            window.editarUsuario = function(index) {
+                const novoNome = prompt("Digite o novo nome:", usuarios[index].nome);
+                const novoEmail = prompt("Digite o novo email:", usuarios[index].email);
+
+                if (novoNome && novoEmail) {
+                    usuarios[index].nome = novoNome;
+                    usuarios[index].email = novoEmail;
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                    carregarUsuarios();
+                }
+            };
+
+            window.excluirUsuario = function(index) {
+                if (confirm("Tem certeza que deseja excluir este usuário?")) {
+                    usuarios.splice(index, 1);
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                    carregarUsuarios();
+                }
+            };
+
+            carregarUsuarios();
+        });
+    </script>
+</body>
+</html>

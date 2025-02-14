@@ -1,0 +1,92 @@
+/* Reset básico para remover margens e preenchimentos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #001f3f; /* Azul marinho escuro */
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+/* Menu de navegação */
+nav {
+    background-color: #003366; /* Azul mais escuro */
+    padding: 0;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background-color: #003366; /* Garantindo que a cor seja aplicada corretamente */
+}
+
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 20px;
+    background-color: transparent; /* Removendo qualquer sobreposição de cor */
+    transition: 0.3s;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #0055a5; /* Azul mais claro ao passar o mouse */
+}
+
+/* Conteúdo principal */
+main {
+    flex: 1; /* Faz o conteúdo ocupar o espaço restante e empurra o rodapé para baixo */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilização das tabelas */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+}
+
+/* Rodapé fixo no final da página */
+footer {
+    padding: 10px;
+    background: #001f3f; /* Azul marinho escuro */
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Objetos</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Área de Administração</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="cadastrar_objeto.html">Cadastro de Objetos</a></li>
+                <li><a href="objetos.html">Lista de Objetos</a></li>
+                <li><a href="cadastrar_usuario.html">Cadastro de Usuários</a></li>
+                <li><a href="usuarios.html">Lista de Usuários</a></li>
+                <li><a href="../public/index.html">Página Inicial</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Lista de Objetos</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaObjetos">
+                <!-- Objetos cadastrados aparecerão aqui -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por Elias Alves - <a href="sobre_autor.html">Sobre o Autor</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabelaObjetos = document.getElementById('tabelaObjetos');
+            let objetos = JSON.parse(localStorage.getItem('objetos')) || [];
+
+            function carregarObjetos() {
+                tabelaObjetos.innerHTML = '';
+
+                if (objetos.length === 0) {
+                    tabelaObjetos.innerHTML = '<tr><td colspan="3">Nenhum objeto cadastrado.</td></tr>';
+                    return;
+                }
+
+                objetos.forEach((objeto, index) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${objeto.nome}</td>
+                        <td>${objeto.descricao}</td>
+                        <td>
+                            <button onclick="editarObjeto(${index})">Editar</button>
+                            <button onclick="excluirObjeto(${index})">Excluir</button>
+                        </td>
+                    `;
+                    tabelaObjetos.appendChild(tr);
+                });
+            }
+
+            window.editarObjeto = function(index) {
+                const novoNome = prompt("Digite o novo nome:", objetos[index].nome);
+                const novaDescricao = prompt("Digite a nova descrição:", objetos[index].descricao);
+
+                if (novoNome && novaDescricao) {
+                    objetos[index].nome = novoNome;
+                    objetos[index].descricao = novaDescricao;
+                    localStorage.setItem('objetos', JSON.stringify(objetos));
+                    carregarObjetos();
+                }
+            };
+
+            window.excluirObjeto = function(index) {
+                if (confirm("Tem certeza que deseja excluir este objeto?")) {
+                    objetos.splice(index, 1);
+                    localStorage.setItem('objetos', JSON.stringify(objetos));
+                    carregarObjetos();
+                }
+            };
+
+            carregarObjetos();
+        });
+    </script>
+</body>
+</html>
