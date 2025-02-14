@@ -24,6 +24,7 @@ html, body {
     background-color: var(--cor-fundo);
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Impede rolagem horizontal */
 }
 
 /* 3️⃣ Cabeçalho */
@@ -33,6 +34,7 @@ header {
     padding: 15px 0;
     text-align: center;
     border-bottom: 3px solid var(--cor-borda);
+    position: relative;
 }
 
 /* 4️⃣ Botão para abrir menu (mobile) */
@@ -46,6 +48,15 @@ header {
     position: absolute;
     top: var(--espacamento-padrao);
     left: var(--espacamento-padrao);
+}
+
+/* Ícones do menu */
+.menu-toggle::before {
+    content: "☰"; /* Ícone de menu */
+}
+
+#menu-toggle:checked ~ nav {
+    display: block;
 }
 
 /* 5️⃣ Menu de navegação */
@@ -87,18 +98,18 @@ nav ul li a:hover {
         display: block;
     }
 
-    nav ul {
+    nav {
         display: none;
-        flex-direction: column;
-        width: 100%;
         position: absolute;
         top: 50px;
         left: 0;
+        width: 100%;
         background-color: var(--cor-secundaria);
     }
 
-    nav ul.active {
-        display: flex;
+    nav ul {
+        flex-direction: column;
+        width: 100%;
     }
 
     nav ul li {
@@ -111,16 +122,19 @@ nav ul li a:hover {
         width: 100%;
         padding: var(--espacamento-padrao);
     }
+
+    /* Menu aparece ao passar o mouse */
+    header:hover nav {
+        display: block;
+    }
 }
 
-/* 7️⃣ Conteúdo principal */
-main {
-    flex: 1;
+/* 7️⃣ Estilos para os objetos (responsividade) */
+.objetos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
     padding: 20px;
-    text-align: center;
-    border: 1px solid var(--cor-borda);
-    background: white;
-    border-radius: 5px;
 }
 
 /* 8️⃣ Estilização das tabelas */
@@ -150,4 +164,11 @@ footer {
     text-align: center;
     margin-top: auto;
     border-top: 3px solid var(--cor-borda);
+}
+
+/*  🔟 Esconder o menu de navegação na impressão */
+@media print {
+    nav {
+        display: none !important;
+    }
 }
