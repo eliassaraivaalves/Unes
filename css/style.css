@@ -55,6 +55,10 @@ header {
     content: "☰"; /* Ícone de menu */
 }
 
+#menu-toggle {
+    display: none;
+}
+
 #menu-toggle:checked ~ nav {
     display: block;
 }
@@ -123,8 +127,8 @@ nav ul li a:hover {
         padding: var(--espacamento-padrao);
     }
 
-    /* Menu aparece ao passar o mouse */
-    header:hover nav {
+    /* Exibir menu ao clicar no botão */
+    #menu-toggle:checked ~ nav {
         display: block;
     }
 }
@@ -132,7 +136,7 @@ nav ul li a:hover {
 /* 7️⃣ Estilos para os objetos (responsividade) */
 .objetos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
     padding: 20px;
 }
@@ -144,6 +148,9 @@ table {
     border-collapse: collapse;
     background: white;
     border: 1px solid var(--cor-borda);
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
 }
 
 th, td {
@@ -166,9 +173,9 @@ footer {
     border-top: 3px solid var(--cor-borda);
 }
 
-/*  🔟 Esconder o menu de navegação na impressão */
+/* 🔟 Esconder o menu de navegação na impressão */
 @media print {
-    nav {
+    nav, .menu-toggle {
         display: none !important;
     }
 }
