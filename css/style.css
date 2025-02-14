@@ -1,4 +1,17 @@
-/* Reset básico para remover margens e preenchimentos padrão */
+/* 1️⃣ Definição de variáveis de cores e tipografia */
+:root {
+    --cor-primaria: #001f3f;  /* Azul marinho escuro */
+    --cor-secundaria: #003366; /* Azul mais escuro */
+    --cor-hover: #0055a5; /* Azul mais claro */
+    --cor-fundo: #f5f5f5;
+    --cor-texto: #333;
+    --cor-borda: #ccc;
+
+    --fonte-principal: Arial, sans-serif;
+    --espacamento-padrao: 10px;
+}
+
+/* 2️⃣ Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -7,24 +20,37 @@
 
 html, body {
     height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
     display: flex;
     flex-direction: column;
 }
 
-/* Cabeçalho */
+/* 3️⃣ Cabeçalho */
 header {
-    background-color: #001f3f; /* Azul marinho escuro */
+    background-color: var(--cor-primaria);
     color: white;
     padding: 15px 0;
     text-align: center;
+    border-bottom: 3px solid var(--cor-borda);
 }
 
-/* Menu de navegação */
+/* 4️⃣ Botão para abrir menu (mobile) */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: var(--espacamento-padrao);
+    left: var(--espacamento-padrao);
+}
+
+/* 5️⃣ Menu de navegação */
 nav {
-    background-color: #003366; /* Azul mais escuro */
-    padding: 0;
+    background-color: var(--cor-secundaria);
     width: 100%;
 }
 
@@ -35,7 +61,6 @@ nav ul {
     align-items: center;
     padding: 0;
     margin: 0;
-    background-color: #003366; /* Garantindo que a cor seja aplicada corretamente */
 }
 
 nav ul li {
@@ -47,46 +72,82 @@ nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    padding: 15px 20px;
-    background-color: transparent; /* Removendo qualquer sobreposição de cor */
+    padding: var(--espacamento-padrao) 20px;
     transition: 0.3s;
     display: inline-block;
 }
 
 nav ul li a:hover {
-    background-color: #0055a5; /* Azul mais claro ao passar o mouse */
+    background-color: var(--cor-hover);
 }
 
-/* Conteúdo principal */
+/* 6️⃣ Estilos para dispositivos menores (mobile) */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background-color: var(--cor-secundaria);
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        text-align: center;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        width: 100%;
+        padding: var(--espacamento-padrao);
+    }
+}
+
+/* 7️⃣ Conteúdo principal */
 main {
-    flex: 1; /* Faz o conteúdo ocupar o espaço restante e empurra o rodapé para baixo */
+    flex: 1;
     padding: 20px;
     text-align: center;
+    border: 1px solid var(--cor-borda);
+    background: white;
+    border-radius: 5px;
 }
 
-/* Estilização das tabelas */
+/* 8️⃣ Estilização das tabelas */
 table {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
     background: white;
+    border: 1px solid var(--cor-borda);
 }
 
 th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: var(--espacamento-padrao);
+    border: 1px solid var(--cor-borda);
 }
 
 th {
-    background-color: #003366;
+    background-color: var(--cor-secundaria);
     color: white;
 }
 
-/* Rodapé fixo no final da página */
+/* 9️⃣ Rodapé fixo no final da página */
 footer {
     padding: 10px;
-    background: #001f3f; /* Azul marinho escuro */
+    background: var(--cor-primaria);
     color: white;
     text-align: center;
     margin-top: auto;
+    border-top: 3px solid var(--cor-borda);
 }
